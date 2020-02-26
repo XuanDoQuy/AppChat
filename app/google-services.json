@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "642511065013",
+    "firebase_url": "https://chatfoy-d6fed.firebaseio.com",
+    "project_id": "chatfoy-d6fed",
+    "storage_bucket": "chatfoy-d6fed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642511065013:android:2ce5d67f8acc0a9b1053fc",
+        "android_client_info": {
+          "package_name": "com.example.chatfoy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642511065013-aodmd5tfm007oduqo134om9ra4n4ocni.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chatfoy",
+            "certificate_hash": "8263065042b2b47d1366dbb1c6b03a2a078e520d"
+          }
+        },
+        {
+          "client_id": "642511065013-l1hqidgron7ldq6gmkgpkm5pa772trac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHNIoT24XUoiJsuGLATjRXQYO0m30y0yw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642511065013-l1hqidgron7ldq6gmkgpkm5pa772trac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

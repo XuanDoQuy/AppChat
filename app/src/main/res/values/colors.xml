@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorToolBar">#E87B4BFF</color>
+    <color name="colorStatusBar">#EB6539BA</color>
+    <color name="colorBorder">#3C0D0525</color>
+    <color name="colorButtonSignUp">#3FC206</color>
+    <color name="colorTextWhite">#FFFFFFFF</color>
+    <color name="colorTextBlack">#000000</color>
+    <color name="colorNavigationBottom">#6A8090FF</color>
+    <color name="bgBottomNavigation">#fe485a</color>
+    <color name="colorTextDefault">#3A3333</color>
+</resources>
