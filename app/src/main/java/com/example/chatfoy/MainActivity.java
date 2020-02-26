@@ -1,5 +1,11 @@
 package com.example.chatfoy;
 
+/*
+name: do quy xuan
+time created: 26/2/2020
+ */
+
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
