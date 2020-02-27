@@ -39,7 +39,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:inputType="text"
+        android:inputType="textMultiLine"
         android:hint="Please enter message"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imgBtnSend"
