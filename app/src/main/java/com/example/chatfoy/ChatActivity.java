@@ -164,7 +164,10 @@ public class ChatActivity extends AppCompatActivity {
                         if (e != null) return;
                         listChat.clear();
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            Chat chat = documentSnapshot.toObject(Chat.class);
+                            boolean isSeen = (boolean) documentSnapshot.get("isSeen");
+                            String idSend = (String) documentSnapshot.get("idSend");
+                            String content = (String) documentSnapshot.get("content");
+                            Chat chat = new Chat(idSend,content,isSeen);
                             listChat.add(chat);
                         }
                         adapter.notifyDataSetChanged();
