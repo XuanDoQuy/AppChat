@@ -11,12 +11,78 @@
 
     <Button
         android:id="@+id/buttonSignOut"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorButtonSignUp"
         android:text="Sign out"
         android:textAllCaps="false"
+        android:textColor="@color/colorTextWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ha_long" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageAvatarProfile"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@mipmap/ic_logo"
+        app:civ_border_color="@color/colorBorder"
+        app:civ_border_width="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textViewProfileName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="50dp"
+        android:text="Họ tên: Đỗ Quý Xuân"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewProfileDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageAvatarProfile"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textViewProfileDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Ngày sinh: 26/01/2000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewProfileEmail"
+        app:layout_constraintEnd_toEndOf="@+id/textViewProfileName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textViewProfileName"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfileName" />
+
+    <TextView
+        android:id="@+id/textViewProfileEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Email: xuandq2601@gmail.com"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSignOut"
+        app:layout_constraintEnd_toEndOf="@+id/textViewProfileDate"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/textViewProfileDate"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfileDate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

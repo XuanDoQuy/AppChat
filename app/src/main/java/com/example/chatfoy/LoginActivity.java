@@ -1,14 +1,17 @@
 package com.example.chatfoy;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText edtEmail, edtPassword;
     Button btnLogin, btnGoSignUp;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = edtPassword.getText().toString();
                 if (accountIsInvalid(email, password)) {
                     Login(email, password);
+                    loading();
                 }
             }
         });
@@ -83,5 +88,17 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void loading(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_loading,null);
+        builder.setView(view);
+        ProgressBar pb = view.findViewById(R.id.pbLoading);
+        pb.setIndeterminate(true);
+        dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        dialog.getWindow().setLayout(200,200);
     }
 }

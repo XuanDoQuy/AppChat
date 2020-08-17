@@ -1,6 +1,7 @@
 package com.example.chatfoy.view.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,13 +21,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ListRequestAdapter extends RecyclerView.Adapter<ListRequestAdapter.ViewHolderRequest> {
+    private static final String TAG = "AAA";
     private Context context;
     private ArrayList<User> listRequest;
     String myId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -59,12 +64,24 @@ public class ListRequestAdapter extends RecyclerView.Adapter<ListRequestAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ViewHolderRequest holder, int position) {
         final User user = listRequest.get(position);
-        if (user.getUrlAvatar().equals("default")){
-            holder.circleImageView.setImageResource(R.mipmap.ic_logo);
-        }else {
-            Glide.with(context).load(user.getUrlAvatar()).into(holder.circleImageView);
-        }
-        holder.txtFullName.setText(user.getFullName());
+        refUser.document(user.getUserId()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error!=null){
+                    Log.d(TAG, "onEvent: have an error at request adapter");
+                    return;
+                }else{
+                    User user = value.toObject(User.class);
+                    if (user.getUrlAvatar().equals("default")){
+                        holder.circleImageView.setImageResource(R.mipmap.ic_logo);
+                    }else {
+                        Glide.with(context).load(user.getUrlAvatar()).into(holder.circleImageView);
+                    }
+                    holder.txtFullName.setText(user.getFullName());
+                }
+            }
+        });
+
         holder.btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,6 +1,7 @@
 package com.example.chatfoy;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -43,6 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
     CollectionReference userRef = db.collection("users");
     String sex;
     private static final String TAG = "AAA";
+    private AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String fullName = edtFullName.getText().toString();
                 if (accountIsInvalid(password, retypePassword, email, fullName)) {
                     CreatAccount(email, password, fullName);
+                    loading();
                 }
             }
         });
@@ -158,6 +163,18 @@ public class SignUpActivity extends AppCompatActivity {
                 sex = "Nam";
             }
         });
+    }
+
+    private void loading(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.dialog_loading,null);
+        builder.setView(view);
+        ProgressBar pb = view.findViewById(R.id.pbLoading);
+        pb.setIndeterminate(true);
+        dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+        dialog.getWindow().setLayout(200,200);
     }
 
 }

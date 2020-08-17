@@ -38,6 +38,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<RoomChat> listRoom = new ArrayList<>();
     ShareViewModel viewModel ;
     boolean userIsOnline;
+    ListenerRegistration listenerRoom,listenerFriend,listenerRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void LoadListFriend(){
-        refFriend.document(myId).collection("listFriend")
+        listenerFriend = refFriend.document(myId).collection("listFriend")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     private void LoadListRequest(){
-        refRequest.document(myId).collection("listRequest")
+        listenerRequest = refRequest.document(myId).collection("listRequest")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
@@ -169,12 +171,13 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
     private void LoadListRoom(){
-        refRoom.whereArrayContains("listIdMember",myId)
+        listenerRoom = refRoom.whereArrayContains("listIdMember",myId)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                         if (e!=null){
                             Log.d(TAG, "Fail to load list room");
+                            return;
                         }
                         listRoom.clear();
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
@@ -197,5 +200,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         refUser.document(myId).update("online",false);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        listenerRoom.remove();
+        listenerRequest.remove();
+        listenerFriend.remove();
     }
 }
