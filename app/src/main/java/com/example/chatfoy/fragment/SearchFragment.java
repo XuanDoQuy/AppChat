@@ -57,7 +57,7 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        editTextSearch = view.findViewById(R.id.editTextSearch);
+
         recyclerViewSearch = view.findViewById(R.id.recyclerViewSearch);
         listUser = new ArrayList<>();
         adapter = new ListUserAdapter(getActivity().getApplicationContext(), listUser);
